@@ -1,0 +1,4 @@
+Strony:
+strona główna,
+kontakt,
+rejestracja,
