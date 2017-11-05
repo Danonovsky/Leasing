@@ -13,12 +13,3 @@
 <p>
   <?=anchor('profile/changePassword','Zmień hasło')?>
 </p>
-<p>
-  <?=anchor('profile/newAnnouncment','Nowe ogłoszenie')?>
-</p>
-<p>
-  <?=anchor('profile/myAnnouncments','Moje ogłoszenia ('.$active.')')?>
-</p>
-<p>
-  <?=anchor('profile/myUnactiveAnnouncments','Nieaktywne ogłoszenia ('.$unactive.')')?>
-</p>

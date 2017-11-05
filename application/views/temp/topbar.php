@@ -10,7 +10,10 @@
   }
   else {
     ?>
-    <p><?=anchor('page/register','Zarejestruj się').', '.anchor('page/login','Zaloguj się')?></p>
+    <p>
+      <span><?=anchor('page/register','Zarejestruj się')?></span>
+      <span><?=anchor('page/login','Zaloguj się')?></span>
+    </p>
     <?php
   }
   ?>

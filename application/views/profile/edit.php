@@ -32,5 +32,5 @@ if($this->session->flashdata('updateMessage')) {
 }
 ?>
 <p>
-  <?=anchor(site_url('profile'),'Powrót')?>
+  <?=anchor('profile','Powrót')?>
 </p>

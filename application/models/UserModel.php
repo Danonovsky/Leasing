@@ -100,5 +100,16 @@ class UserModel extends CI_Model {
     redirect(site_url());
   }
 
+  public function updateSessionData() {
+    $result=$this->db->get_where('users',array('id'=>$this->session->userdata('id')))->row_array();
+    $data=array(
+      'name'=>$result['name'],
+      'surname'=>$result['surname'],
+      'phoneNr'=>$result['phoneNr'],
+      'city'=>$result['city']
+    );
+    $this->session->set_userdata($data);
+  }
+
 
 }

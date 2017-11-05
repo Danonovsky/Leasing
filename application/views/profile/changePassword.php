@@ -27,5 +27,5 @@ if($this->session->flashdata('passwordMessage')) {
 }
 ?>
 <p>
-  <?=anchor(site_url('profile'),'Powrót')?>
+  <?=anchor('profile','Powrót')?>
 </p>
