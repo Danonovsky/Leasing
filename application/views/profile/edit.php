@@ -2,27 +2,27 @@
 
 <?=form_open('profile/edit')?>
   <p>
-    <label for="name">Imię: </label>
+    <label for="name">Name: </label>
     <input type="text" name="name" value="<?=$this->session->userdata('name')?>">
   </p>
 
   <p>
-    <label for="surname">Nazwisko: </label>
+    <label for="surname">Surname: </label>
     <input type="text" name="surname" value="<?=$this->session->userdata('surname')?>">
   </p>
 
   <p>
-    <label for="phoneNr">Numer telefonu: </label>
+    <label for="phoneNr">Phone Number: </label>
     <input type="text" name="phoneNr" value="<?=$this->session->userdata('phoneNr')?>">
   </p>
 
   <p>
-    <label for="city">Miasto: </label>
+    <label for="city">City: </label>
     <input type="text" name="city" value="<?=$this->session->userdata('city')?>">
   </p>
 
   <p>
-    <input type="submit" name="submit" value="Zapisz zmiany">
+    <input type="submit" name="submit" value="Save changes">
   </p>
 </form>
 
@@ -32,5 +32,5 @@ if($this->session->flashdata('updateMessage')) {
 }
 ?>
 <p>
-  <?=anchor('profile','Powrót')?>
+  <?=anchor('profile','Return')?>
 </p>

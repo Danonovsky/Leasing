@@ -1,15 +1,15 @@
 <p>
-  Imię i nazwisko: <?=$this->session->userdata('name').' '.$this->session->userdata('surname')?>
+  Personal data: <?=$this->session->userdata('name').' '.$this->session->userdata('surname')?>
 </p>
 <p>
-  Miasto: <?=$this->session->userdata('city')?>
+  City: <?=$this->session->userdata('city')?>
 </p>
 <p>
-  Numer telefonu: <?=$this->session->userdata('phoneNr')?>
+  Phone Number: <?=$this->session->userdata('phoneNr')?>
 </p>
 <p>
-  <?=anchor('profile/edit','Edytuj dane')?>
+  <?=anchor('profile/edit','Edit data')?>
 </p>
 <p>
-  <?=anchor('profile/changePassword','Zmień hasło')?>
+  <?=anchor('profile/changePassword','Change password')?>
 </p>

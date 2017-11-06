@@ -3,16 +3,16 @@
   if($logged) {
     ?>
     <p>
-      <span><?=anchor('profile','Mój profil')?></span>
-      <span><?=anchor('page/logout','Wyloguj')?></span>
+      <span><?=anchor('profile','My profile')?></span>
+      <span><?=anchor('page/logout','Log Out')?></span>
     </p>
     <?php
   }
   else {
     ?>
     <p>
-      <span><?=anchor('page/register','Zarejestruj się')?></span>
-      <span><?=anchor('page/login','Zaloguj się')?></span>
+      <span><?=anchor('page/register','Register')?></span>
+      <span><?=anchor('page/login','Log in')?></span>
     </p>
     <?php
   }

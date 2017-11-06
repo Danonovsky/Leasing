@@ -7,14 +7,14 @@
       <input type="email" name="email">
     </p>
     <p>
-      <label for="password">Hasło:</label>
+      <label for="password">Password:</label>
       <input type="password" name="password">
     </p>
     <p>
-      Nie posiadasz konta? <?=anchor('page/register','Zarejestruj się')?>
+      Haven't created account yet?? <?=anchor('page/register','Create one')?>
     </p>
     <p>
-      <input type="submit" value="Zaloguj się">
+      <input type="submit" value="Log In">
     </p>
     <p>
       <?=$this->session->flashdata('loginMessage')?>

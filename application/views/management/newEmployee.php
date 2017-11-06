@@ -1,6 +1,6 @@
 <?=validation_errors()?>
 
-<?=form_open(site_url('page/register'))?>
+<?=form_open(site_url('management/newEmployee'))?>
 
 <p>
   <label for="name">Name:</label>
@@ -33,12 +33,31 @@
 </p>
 
 <p>
-  <label for="phoneNr">Phone Nr:</label>
+  <label for="phoneNr">Phone number:</label>
   <input type="text" name="phoneNr">
 </p>
 
 <p>
-  <input type="submit" value="Register">
+  <label for="rank">Rank:</label>
+  <select name="rank">
+    <?php
+    foreach($ranks as $a) {
+      ?>
+      <option value="<?=$a['id']?>"><?=$a['name']?></option>
+      <?php
+    }
+    ?>
+  </select>
 </p>
+
+<p>
+  <input type="submit" value="Add employee">
+</p>
+
+<p>
+  <?=anchor('management/manageEmployees','Return')?>
+</p>
+
+<?=$this->session->flashdata('newEmployeeMessage')?>
 
 </form>

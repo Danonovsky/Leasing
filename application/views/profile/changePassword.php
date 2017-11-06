@@ -2,22 +2,22 @@
 
 <?=form_open('profile/changePassword')?>
   <p>
-    <label for="actualPassword">Aktualne hasło: </label>
+    <label for="actualPassword">Actual password: </label>
     <input type="password" name="actualPassword">
   </p>
 
   <p>
-    <label for="password">Nowe hasło: </label>
+    <label for="password">New password: </label>
     <input type="password" name="password">
   </p>
 
   <p>
-    <label for="password1">Powtórz nowe hasło: </label>
+    <label for="password1">Repeat new password: </label>
     <input type="password" name="password1">
   </p>
 
   <p>
-    <input type="submit" name="submit" value="Zapisz zmiany">
+    <input type="submit" name="submit" value="Save changes">
   </p>
 </form>
 
@@ -27,5 +27,5 @@ if($this->session->flashdata('passwordMessage')) {
 }
 ?>
 <p>
-  <?=anchor('profile','Powrót')?>
+  <?=anchor('profile','Return')?>
 </p>
