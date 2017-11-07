@@ -14,6 +14,7 @@ class Management extends CI_Controller {
     $data['title']='Zarządzanie - strona główna';
 
     if($this->employeeModel->employeeLogged()) {
+      $data['cars']=$this->managementModel->getCars();
       $this->load->view('temp/header',$data);
       $this->load->view('temp/managementTopbar');
       $this->load->view('temp/navbar');
@@ -42,6 +43,8 @@ class Management extends CI_Controller {
 
   public function manageEmployees() {
     $this->employeeModel->checkEmployee();
+
+    $this->managementModel->checkRank(1);
 
     $data['title']='Zarządzanie - pracownicy';
     $data['employees']=$this->managementModel->getEmployees();
@@ -134,58 +137,47 @@ class Management extends CI_Controller {
     redirect('management/manageEmployees');
   }
 
-  public function newMark() {
+  public function newCar() {
     $this->employeeModel->checkEmployee();
 
-    $data['title']='Zarządzanie - nowy model';
+    $data['title']='Management - New Car';
 
-    $this->form_validation->set_rules('name','"Nazwa"','trim|required|alpha_numeric_spaces|is_unique[mark.name]');
+    $this->managementModel->checkRank(2);
 
-    if($this->form_validation->run()===false) {
-      $this->load->view('temp/header',$data);
-      $this->load->view('temp/managementTopbar');
-      $this->load->view('temp/navbar');
-      $this->load->view('management/newMark');
-      $this->load->view('temp/footer');
-      $this->load->view('temp/end');
+    $this->form_validation->set_rules('mark','"Mark"','trim|required');
+    $this->form_validation->set_rules('model','"Model"','trim|required');
+    $this->form_validation->set_rules('capacity','"Capacity"','trim|required|numeric|greater_than[0]');
+    $this->form_validation->set_rules('year','"Year"','trim|required|numeric|greater_than[0]');
+    $this->form_validation->set_rules('fuel','"Fuel"','trim|required');
+    $this->form_validation->set_rules('body','"Body"','trim|required');
+    $this->form_validation->set_rules('name','"Name"','trim|required');
+
+    if($this->form_validation->run()===true) {
+      $this->managementModel->newCar();
+      redirect('management/newCar');
     }
-    else {
-      $this->managementModel->newCategory();
-      redirect('management');
-    }
+    $data['marks']=$this->managementModel->getFrom('mark');
+    $data['bodies']=$this->managementModel->getFrom('body');
+    $data['fuels']=$this->managementModel->getFrom('fuel');
+    $data['scriptName']='getModels.js';
+    $this->load->view('temp/header',$data);
+    $this->load->view('temp/managementTopbar');
+    $this->load->view('temp/navbar');
+    $this->load->view('management/newCar',$data);
+    $this->load->view('temp/footer');
+    $this->load->view('temp/loadJs',$data);
+    $this->load->view('temp/end');
   }
 
-  public function deleteMark($id=false) {
-    $this->employeeModel->checkEmployee();
+  public function deleteCar($id=false) {
     if($id===false) {
       redirect('management');
     }
     else {
-      $this->managementModel->deleteCategory($id);
+      $this->employeeModel->checkEmployee();
+      $this->managementModel->checkCarExists($id);
+      $this->managementModel->deleteCar($id);
       redirect('management');
-    }
-  }
-
-  public function previewCategory($id=false) {
-    $this->employeeModel->checkEmployee();
-    if($id===false) {
-      redirect('management');
-    }
-    else {
-      $data['title']='Zarządzanie - podgląd';
-      if(($r=$this->managementModel->getFields($id))===false) {
-        redirect('management');
-      }
-      else {
-        $data['fields']=$r;
-        $data['category']=$this->managementModel->getCategory($id);
-        $this->load->view('temp/header',$data);
-        $this->load->view('temp/managementTopbar');
-        $this->load->view('temp/navbar');
-        $this->load->view('management/previewCategory',$data);
-        $this->load->view('temp/footer');
-        $this->load->view('temp/end');
-      }
     }
   }
 

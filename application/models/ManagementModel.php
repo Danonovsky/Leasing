@@ -68,4 +68,39 @@ class ManagementModel extends CI_Model {
   public function deleteEmployee($id) {
     $this->db->delete('employees',array('id'=>$id));
   }
+
+  public function checkCarExists($id) {
+    $r=$this->db->get_where('cars',array('id'=>$id))->result_array();
+    if(count($r)<1) {
+      redirect('management');
+    }
+  }
+
+  public function getFrom($table) {
+    return $this->db->get($table)->result_array();
+  }
+
+  public function getCars() {
+    return $this->db->get('getCars')->result_array();
+  }
+
+  public function newCar() {
+    $data=array(
+      'id'=>null,
+      'name'=>$this->input->post('name'),
+      'modelId'=>$this->input->post('model'),
+      'capacity'=>$this->input->post('capacity'),
+      'year'=>$this->input->post('year'),
+      'fuelId'=>$this->input->post('fuel'),
+      'bodyId'=>$this->input->post('body')
+    );
+    if($this->db->insert('cars',$data)) $mess='Car added successful.';
+    else $mess='Error. Car not added.';
+
+    $this->session->set_flashdata('newCarMessage',$mess);
+  }
+
+  public function deleteCar($id) {
+    $this->db->delete('cars',array('id'=>$id));
+  }
 }
