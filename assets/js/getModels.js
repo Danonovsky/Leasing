@@ -19,6 +19,5 @@ $(document).ready(function(){
   changeModels();
   $('#mark').on('change', function(){
     changeModels();
-    console.log($(this).val());
   });
 });

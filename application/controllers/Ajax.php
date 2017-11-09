@@ -15,4 +15,8 @@ class Ajax extends CI_Controller {
   public function getModels() {
     echo json_encode($this->ajaxModel->getModels());
   }
+
+  public function getCars() {
+    echo json_encode($this->ajaxModel->getCars());
+  }
 }

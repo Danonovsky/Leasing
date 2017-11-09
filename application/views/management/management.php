@@ -25,6 +25,7 @@ switch($this->session->userdata('employeeRank')) {
             <th>Engine</th>
             <th>Year</th>
             <th>Body</th>
+            <th>Wage</th>
             <th>Management</th>
           </tr>
         </thead>
@@ -41,6 +42,7 @@ switch($this->session->userdata('employeeRank')) {
                 <td><?=$a['capacity'].' '.$a['fuel']?></td>
                 <td><?=$a['year']?></td>
                 <td><?=$a['body']?></td>
+                <td><?=$a['wage']?></td>
                 <td><?=anchor('management/deleteCar/'.$a['id'],'Delete')?></td>
               </tr>
               <?php
@@ -48,7 +50,7 @@ switch($this->session->userdata('employeeRank')) {
           }
           ?>
           <tr>
-            <td colspan="8"><?=anchor('management/newCar','Add new car')?></td>
+            <td colspan="9"><?=anchor('management/newCar','Add new car')?></td>
           </tr>
         </tbody>
       </table>

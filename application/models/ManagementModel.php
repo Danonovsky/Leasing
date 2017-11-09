@@ -81,10 +81,13 @@ class ManagementModel extends CI_Model {
   }
 
   public function getCars() {
-    return $this->db->get('getCars')->result_array();
+    return $this->db->get('carsv')->result_array();
   }
 
   public function newCar() {
+    $this->db->trans_start();
+    //basic upload
+
     $data=array(
       'id'=>null,
       'name'=>$this->input->post('name'),
@@ -92,10 +95,37 @@ class ManagementModel extends CI_Model {
       'capacity'=>$this->input->post('capacity'),
       'year'=>$this->input->post('year'),
       'fuelId'=>$this->input->post('fuel'),
-      'bodyId'=>$this->input->post('body')
+      'bodyId'=>$this->input->post('body'),
+      'wage'=>$this->input->post('wage')
     );
-    if($this->db->insert('cars',$data)) $mess='Car added successful.';
-    else $mess='Error. Car not added.';
+
+    $this->db->insert('cars',$data);
+
+    $id=$this->db->insert_id();
+    //photo upload
+
+    $dir='img/';
+    $files=$_FILES['pictures'];
+    $file=$dir.date('YmdHis').$this->session->userdata('id');
+    $photos=array();
+    for($i=0;$i<count($files['name']);$i++) {
+      $tmp=$files['tmp_name'][$i];
+      $name=$files['name'][$i];
+      $end = pathinfo($name,PATHINFO_EXTENSION);
+      if(is_uploaded_file($tmp)) {
+        $path=$file.$i.'.'.$end;
+        move_uploaded_file($tmp,$path);
+        $photos[]=array('id'=>null,'carId'=>$id,'path'=>$path);
+      }
+    }
+    if(count($photos)>0) {
+      $this->db->insert_batch('pictures',$photos);
+    }
+
+    $this->db->trans_complete();
+
+    if($this->db->trans_status()===false) $mess='Error. Car not added.';
+    else $mess='Car added successful.';
 
     $this->session->set_flashdata('newCarMessage',$mess);
   }

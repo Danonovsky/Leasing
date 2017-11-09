@@ -6,3 +6,16 @@ body {
 input, select, textarea {
   color: #000;
 }
+
+.smallPic {
+  width: 300px;
+  height: auto;
+}
+
+.main {
+  width: 500px;
+}
+
+.main img {
+  width: 100%;
+}

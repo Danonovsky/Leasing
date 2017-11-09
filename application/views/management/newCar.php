@@ -2,7 +2,7 @@
 
 <input type="hidden" id="baseUrl" data-baseurl="<?=base_url()?>">
 
-<?=form_open('management/newCar')?>
+<?=form_open_multipart('management/newCar')?>
 
 <p>
   <label for="mark">Mark</label>
@@ -62,6 +62,16 @@
 <p>
   <label for="name">Name</label>
   <input type="text" name="name">
+</p>
+
+<p>
+  <label for="wage">Wage (monthly): </label>
+  <input type="text" name="wage">
+</p>
+
+<p>
+  <label for="pictures">Pictures (1st is main): </label>
+  <input type="file" name="pictures[]" accept="image/*" multiple>
 </p>
 
 <p>
