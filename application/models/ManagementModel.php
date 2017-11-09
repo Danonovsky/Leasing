@@ -133,4 +133,51 @@ class ManagementModel extends CI_Model {
   public function deleteCar($id) {
     $this->db->delete('cars',array('id'=>$id));
   }
+
+  public function getLoans() {
+    return $this->db->get('loanv')->result_array();
+  }
+
+  public function acceptLoan($id) {
+    $data=array(
+      'employeeId'=>$this->session->userdata('employeeId'),
+      'confirmed'=>true
+    );
+    $r=$this->db->get_where('loan',array('id'=>$id))->row_array();
+    $user=$this->db->get_where('users',array('id'=>$r['userId']))->row_array();
+    $to=$user['email'];
+
+    $this->db->trans_start();
+
+    $this->db->update('loan',$data,array('id'=>$id));
+
+    $this->db->trans_complete();
+
+    if($this->db->trans_status()===false) $mess='Error. Loan currently managed.';
+    else
+    {
+      $mess='Loan accepted successful.';
+      $headers = "From: " .$to. "\r\n";
+      $headers .= "Reply-To: ".$to. "\r\n";
+      $headers .= "MIME-Version: 1.0\r\n";
+      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      $subject='Loan Commit';
+      $message='Your loan was accepted. Now we need you to contact us (IP, or by phone) to submit everything. Greetings, LeasIt.com team.';
+
+
+      mail($to, $subject, $message, $headers);
+    }
+
+    $this->session->set_flashdata('eLoanMessage',$mess);
+  }
+
+  public function isLoaned($id) {
+    $r=$this->db->get_where('loan',array('id'=>$id,'confirmed'=>true))->result_array();
+    if(count($r)>0) return true;
+    else return false;
+  }
+
+  public function deleteLoan($id) {
+    $this->db->delete('loan',array('id'=>$id));
+  }
 }

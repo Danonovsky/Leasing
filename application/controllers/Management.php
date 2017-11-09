@@ -11,20 +11,21 @@ class Management extends CI_Controller {
   }
 
   public function index() {
-    $data['title']='Zarządzanie - strona główna';
+    $data['title']='Management - Home';
 
     if($this->employeeModel->employeeLogged()) {
       $data['cars']=$this->managementModel->getCars();
+      $data['loans']=$this->managementModel->getLoans();
       $this->load->view('temp/header',$data);
       $this->load->view('temp/managementTopbar');
       $this->load->view('temp/navbar');
-      $this->load->view('management/management');
+      $this->load->view('management/management',$data);
       $this->load->view('temp/footer');
       $this->load->view('temp/end');
     }
     else {
       $this->form_validation->set_rules('email','"E-mail"','trim|required|valid_email');
-      $this->form_validation->set_rules('password','"Hasło"','trim|required|min_length[3]|alpha');
+      $this->form_validation->set_rules('password','"Password"','trim|required|min_length[3]|alpha');
 
       if($this->form_validation->run()===false) {
         $this->load->view('temp/header',$data);
@@ -46,7 +47,7 @@ class Management extends CI_Controller {
 
     $this->managementModel->checkRank(1);
 
-    $data['title']='Zarządzanie - pracownicy';
+    $data['title']='Management - Employees';
     $data['employees']=$this->managementModel->getEmployees();
     $this->load->view('temp/header',$data);
     $this->load->view('temp/managementTopbar');
@@ -67,14 +68,14 @@ class Management extends CI_Controller {
     $data['title']=' Zarządzanie - nowy pracownik';
     $data['ranks']=$this->managementModel->getRanks();
 
-    $this->form_validation->set_rules('name','"Imię"','trim|required|min_length[3]|alpha');
-    $this->form_validation->set_rules('surname','"Nazwisko"','trim|required|min_length[3]|alpha');
+    $this->form_validation->set_rules('name','"Name"','trim|required|min_length[3]|alpha');
+    $this->form_validation->set_rules('surname','"Surname"','trim|required|min_length[3]|alpha');
     $this->form_validation->set_rules('email','"E-mail"','trim|required|valid_email|is_unique[users.email]');
-    $this->form_validation->set_rules('password','"Hasło"','trim|required');
-    $this->form_validation->set_rules('password1','"Powtórz hasło"','trim|required|matches[password]');
-    $this->form_validation->set_rules('phoneNr','"Numer telefonu"','trim|required|numeric|exact_length[9]');
-    $this->form_validation->set_rules('city','"Miasto"','trim|required');
-    $this->form_validation->set_rules('rank','"Ranga"','trim|required');
+    $this->form_validation->set_rules('password','"Password"','trim|required');
+    $this->form_validation->set_rules('password1','"Repeat Password"','trim|required|matches[password]');
+    $this->form_validation->set_rules('phoneNr','"Phone Number"','trim|required|numeric|exact_length[9]');
+    $this->form_validation->set_rules('city','"City"','trim|required');
+    $this->form_validation->set_rules('rank','"Rank"','trim|required');
 
     if($this->form_validation->run()===true) {
       $this->managementModel->addEmployee();
@@ -101,7 +102,7 @@ class Management extends CI_Controller {
     $this->load->helper('form');
     $this->load->library('form_validation');
 
-    $data['title']=' Zarządzanie - nowy pracownik';
+    $data['title']=' Management - New Employee';
     $data['ranks']=$this->managementModel->getRanks();
     $data['employee']=$this->managementModel->getEmployee($id);
 
@@ -135,6 +136,21 @@ class Management extends CI_Controller {
 
     $this->managementModel->deleteEmployee($id);
     redirect('management/manageEmployees');
+  }
+
+  public function history() {
+    $this->employeeModel->checkEmployee();
+    $this->managementModel->checkRank(1);
+
+    $data['title']='History';
+    $data['loans']=$this->managementModel->getLoans();
+
+    $this->load->view('temp/header',$data);
+    $this->load->view('temp/managementTopbar');
+    $this->load->view('temp/navbar');
+    $this->load->view('management/history',$data);
+    $this->load->view('temp/footer');
+    $this->load->view('temp/end');
   }
 
   public function newCar() {
@@ -175,10 +191,37 @@ class Management extends CI_Controller {
     }
     else {
       $this->employeeModel->checkEmployee();
+      $this->managementModel->checkRank(2);
       $this->managementModel->checkCarExists($id);
       $this->managementModel->deleteCar($id);
       redirect('management');
     }
+  }
+
+  public function acceptLoan($id=false) {
+    if(!$id) {
+      redirect('management');
+    }
+    $this->employeeModel->checkEmployee();
+    $this->managementModel->checkRank(3);
+
+    if($this->managementModel->isLoaned($id)) redirect('management');
+
+    $this->managementModel->acceptLoan($id);
+
+    redirect('management');
+  }
+
+  public function deleteLoan($id=false) {
+    if(!$id) {
+      redirect('management');
+    }
+    $this->employeeModel->checkEmployee();
+    $this->managementModel->checkRank(3);
+
+    $this->managementModel->deleteLoan($id);
+
+    redirect('management');
   }
 
   public function logout() {
