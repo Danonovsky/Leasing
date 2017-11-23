@@ -42,3 +42,36 @@ input, select, textarea {
 .fill{
   min-height:100vh;
 }
+
+.input-sizer{
+  width:300px;
+}
+
+.user-access{
+  border: 2px solid #808080;
+  border-radius: 8px;
+  padding:10px;
+}
+
+.user-errors{
+  border: 2px solid #A62A2A;
+  border-radius: 8px;
+  padding: 10px;
+  color: #A62A2A;
+}
+
+.bg-darker-white{
+  background-color: #EEE;
+}
+
+.font-sizer{
+  font-size:14px;
+}
+
+.font-sizer-bigger{
+  font-size:18px;
+}
+
+.bg-white{
+  background-color: #FFF;
+}
