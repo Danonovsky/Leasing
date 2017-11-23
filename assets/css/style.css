@@ -1,10 +1,24 @@
 body {
-  background: #333;
-  color: #fff;
+  background: #E4E4E4;
+  margin: 0px;
 }
+
+footer{
+  clear:both;
+  height: 50px;
+  padding: 10px 0px 30px;
+  border-top: 1px solid #7C7C7C;
+}
+
 
 input, select, textarea {
   color: #000;
+}
+
+.top-panel{
+  height: 40px;
+  padding: 10px 0px 20px;
+  border-bottom: 1px solid #7C7C7C;
 }
 
 .smallPic {
@@ -18,4 +32,13 @@ input, select, textarea {
 
 .main img {
   width: 100%;
+}
+
+.user-anchor, .user-anchor:hover, .user-anchor:active{
+  color: #202020;
+  font-weight: bold;
+}
+
+.fill{
+  min-height:100vh;
 }
