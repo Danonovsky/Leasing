@@ -1,6 +1,6 @@
 function appendOffer(ble,ble1) {
-  var object='<article class="offer"><hr>';
-  object+='<p>Name: '+ble.name+'</p>';
+  var object='<article class="offer bg-white margin-bottom padding-left"><hr>';
+  object+='<h3>Name: '+ble.name+'</h3>';
   if(ble1.length>0) {
     object+='<p><img class="smallPic" src="'+$('#baseUrl').data('baseurl')+ble1[0].path+'" alt="picture"></p>';
   }
@@ -10,7 +10,7 @@ function appendOffer(ble,ble1) {
   object+='<p>Body: '+ble.body+'</p>';
   object+='<p>Year: '+ble.year+'</p>';
   object+='<p>Wage: '+ble.wage+'PLN</p>';
-  object+='<p><a href="'+$('#baseUrl').data('baseurl')+'/index.php/offer/details/'+ble.id+'">See details</a></p>';
+  object+='<p><a class="user-anchor" href="'+$('#baseUrl').data('baseurl')+'/index.php/offer/details/'+ble.id+'">See details</a></p>';
   object+='</article';
   $('.offers').append(object);
 }

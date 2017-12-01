@@ -47,6 +47,26 @@ input, select, textarea {
   width:300px;
 }
 
+.input-sizer-small{
+  width:100px;
+}
+
+.display-fix{
+  display: inline-block !important;
+}
+
+.padding-left{
+  padding-left: 140px;
+}
+
+.margin-bottom{
+  margin-bottom: 20px;
+}
+
+.offer-text{
+  font-weight: bold;
+}
+
 .user-access{
   border: 2px solid #808080;
   border-radius: 8px;
@@ -74,4 +94,8 @@ input, select, textarea {
 
 .bg-white{
   background-color: #FFF;
+}
+
+.margin-bottom{
+  margin-bottom: 20px;
 }
