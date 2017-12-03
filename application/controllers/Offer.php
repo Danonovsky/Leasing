@@ -23,11 +23,27 @@ class Offer extends CI_Controller {
     $data['title']='Offer';
     $data['logged']=$this->userModel->isLogged();
 
-    $config['base_url'] = site_url('offer/index/');
-    $config['total_rows'] = count($this->managementModel->getCars());
-    $config['per_page'] = $this->session->userdata('offersPerPage');
-    $config['use_page_numbers']=TRUE;
-
+    $config=array(
+      'base_url'=>site_url('offer/index'),
+      'total_rows'=>count($this->managementModel->getCars()),
+      'per_page'=>$this->session->userdata('offersPerPage'),
+      'use_page_numbers'=>true,
+      'first_tag_open'=>'<li>',
+      'first_tag_close'=>'</li>',
+      'first_link'=>'<span aria-hidden="true">&laquo;</span>',
+      'first_url'=>site_url('offer'),
+      'last_tag_open'=>'<li>',
+      'last_tag_close'=>'</li>',
+      'last_link'=>'<span aria-hidden="true">&raquo;</span>',
+      'next_tag_open'=>'<li>',
+      'next_tag_close'=>'</li>',
+      'prev_tag_open'=>'<li>',
+      'prev_tag_close'=>'</li>',
+      'cur_tag_open'=>'<li class="active"><a href="#">',
+      'cur_tag_close'=>'</a></li>',
+      'num_tag_open'=>'<li>',
+      'num_tag_close'=>'</li>'
+    );
     $this->pagination->initialize($config);
 
     $this->load->view('temp/header',$data);
