@@ -22,8 +22,8 @@ input, select, textarea {
 }
 
 .smallPic {
-  width: 300px;
-  height: auto;
+  height: 318px;
+  overflow-y: auto;
 }
 
 .main {

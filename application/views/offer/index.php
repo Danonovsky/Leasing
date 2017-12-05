@@ -1,7 +1,7 @@
 <input type="hidden" id="baseUrl" data-baseurl="<?=base_url()?>">
 <input type="hidden" id="page" data-page="<?=$page?>">
 
-  <div class="col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10">
+  <div class="container">
     <p>
       <h2>Our company offers wide selection of cars </h2>
       <div class="form-group">
@@ -22,7 +22,7 @@
     </section>
 
     <?=form_open('offer/perSite')?>
-    <div class="form-group">
+    <div class="form-group col-xs-12">
       <label for="perSite" class="label label-default font-sizer-bigger">Ile na stronę:</label>
       <select class="form-control input-sizer-small display-fix" name="perSite">
         <option value="5" <?php if($this->session->userdata('offersPerPage')==5) echo 'selected' ?>>5</option>
@@ -36,7 +36,7 @@
     <?php
     if($this->session->userdata('offersPerPage')!=99) {
       ?>
-      <section class="pagination">
+      <section class="pagination col-xs-12">
       <?=$this->pagination->create_links()?>
       </section>
       <?php
