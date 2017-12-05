@@ -12,7 +12,7 @@ function appendOffer(ble,ble1) {
   object+='<p>Body: '+ble.body+'</p>';
   object+='<p>Year: '+ble.year+'</p>';
   object+='<p>Wage: '+ble.wage+'PLN</p>';
-  object+='<p><a class="user-anchor" href="'+$('#baseUrl').data('baseurl')+'/index.php/offer/details/'+ble.id+'">See details</a></p>';
+  object+='<p><a class="user-anchor" href="'+$('#baseUrl').data('baseurl')+'index.php/offer/details/'+ble.id+'">See details</a></p>';
   object+='</div></div></article';
   $('.offers').append(object);
 }
